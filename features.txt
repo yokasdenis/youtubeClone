@@ -1,0 +1,4 @@
+sidebar toggle: extra information is hidden when toggled show relevant features
+Home link: links to the home page of user
+scroll feature: left scroll button disappears when original scroll position is reached and appears when needed
+search functionality
