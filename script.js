@@ -30,6 +30,7 @@ async function fetchVideos(searchQuery, maxResults) {
   const data = await response.json();
   localStorage.setItem("data",JSON.stringify(data.items))
 }
+fetchVideos("music",12)
 
 
 
