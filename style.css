@@ -121,14 +121,32 @@ background-color: gray;
 
 .card{
     min-width: 275px; 
-    height: 247px;
+    max-width: 400px;
+    height: 310px;
+    background-color: black;
+    gap: 10px;
+    font-size: smaller;
 }
 #cardContainer{
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    color: red;
+    font-size: larger;
 }
 .card > div:last-child{
     display:flex;
     justify-content: space-between;
+    color: white;
+}
+.card > div:last-child > img{
+    width: 36px;
+    height: 36px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+}
+.card > div:last-child > div{
+    display: flex;
+    flex-direction: column;
 }
