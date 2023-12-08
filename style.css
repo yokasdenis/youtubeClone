@@ -138,6 +138,20 @@ background-color: gray;
     display:flex;
     justify-content: space-between;
     color: white;
+<<<<<<< HEAD
+=======
+}
+.card > div:last-child > img{
+    width: 36px;
+    height: 36px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+}
+.card > div:last-child > div{
+    display: flex;
+    flex-direction: column;
+>>>>>>> 08d3c5810568b68b0668a2dde413ea50f17b7203
 }
 .card > div:last-child > img{
     width: 36px;

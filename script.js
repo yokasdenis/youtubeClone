@@ -19,8 +19,7 @@ topMainBody.addEventListener('scroll', function () {
 }});
 
 
-const apiKey="AIzaSyAyBVobRZdsqv8hb0R5w6pRAds5NWAw1Zo";
-localStorage.setItem("api_Key", apiKey);
+const API_KEY="AIzaSyDADh9Tks_KcpyjmnyqDLAiIrvpjW8QVAo";
 const BASE_URL = "https://www.googleapis.com/youtube/v3";
 
 
@@ -34,15 +33,13 @@ async function fetchVideos(searchQuery, maxResults) {
 fetchVideos("music",12)
 
 
-
-async function getChannelLogo(channelId){
-  // https://www.googleapis.com/youtube/v3/channels?key=AIzaSyBmOfUnRNYc22e04ZmK79uRbPb6388K9AE&part=snippet&id=UC8Wd_RVw8T1O1_IWEbICkIg
-  const response = await fetch(`${BASE_URL}/channels?key=${apiKey}&part=snippet&id=${channelId}`);
-  const data = await response.json();
-  // console.log(data);
-  localStorage.setItem("data2",JSON.stringify(data))
-}
-
+// async function getChannelLogo(channelId){
+//   // https://www.googleapis.com/youtube/v3/channels?key=AIzaSyBmOfUnRNYc22e04ZmK79uRbPb6388K9AE&part=snippet&id=UC8Wd_RVw8T1O1_IWEbICkIg
+//   const response = await fetch(`${BASE_URL}/channels?key=${API_KEY}&part=snippet&id=${channelId}`);
+//   const data = await response.json();
+//   // console.log(data);
+//   localStorage.setItem("data2",JSON.stringify(data.items))
+// }
 async function getVideoStats(videoId){
   // https://www.googleapis.com/youtube/v3/videos?key=AIzaSyBmOfUnRNYc22e04ZmK79uRbPb6388K9AE&part=statistics&id=JhIBqykjzbs
   const response = await fetch(`${BASE_URL}/videos?key=${apiKey}&part=statistics&id=${videoId}`);
@@ -91,41 +88,8 @@ function renderAll(){
  
   }
 }
-function getViews(n){
-  if(n < 1000)
-      return n ;
 
-  if(n <= 999999){
-      n /= 1000;
-      n = parseInt(n);
-      return n + "K" ;
-  }
-  return parseInt(n / 1000000).toFixed(1) + "M" ;
-}
 
-// function displayView(data){
-//     const spanDiv=document.createElement("span");
-//  let views=getViews(data)
-//     span.innerText=views;
-//   const lastDivInCard = document.getElementById("test");
-//   lastDivInCard.appendChild(spanDiv);
-// }
-
-const searchInput=document.getElementById("search");
-const searchButton=document.getElementById("searchIconDiv")
-const container = document.getElementById("container");
-// searchButton.addEventListener("click",searchFun);
-// function searchFun() {
-//   cardContainer.innerHTML="";
-//   let searchVal=searchInput.value
-//   // if(searchVal==""){
-//   //   fetchVideos("music",12)
-//   //   re
-//   // }else{
-//   //   fetchVideos(searchVal,12)
-//   // }
-// }
-// renderAll();
 window.addEventListener("load", () => {
   // we need to write logic for rendering video player
   // iframe
