@@ -67,7 +67,7 @@ margin-left: 19px;
 #mainBody{
     position: absolute;
     left: 225px;
-    background-color: black;
+    background-color: #212121;
 }
 #homeLink > a{
     color:white;
@@ -80,6 +80,7 @@ margin-left: 19px;
     width: 80vw;
     overflow: hidden;
     padding:0px 22px;
+
 }
 #topMainBody>div{
 background-color: #303030;
@@ -88,12 +89,13 @@ height: 32px;
 width: 53px;
 padding:5px 12px;
 box-sizing: border-box;
+color: white;
 }
 
 #first{
     width: 47px !important;
     background-color: white !important;
-    color: black;
+    color: black !important ;
 }
 #leftScroll{
     position: absolute;
@@ -120,78 +122,75 @@ background-color: gray;
 }
 
 .card{
-    min-width: 275px; 
-    max-width: 400px;
-    height: 310px;
-    background-color: black;
-    gap: 10px;
-    font-size: smaller;
+    min-width: 350px; 
+    max-width: 350px;
+    height: 350px;
+    background-color: #212121;
+    font-size:14px;
+    border: none;
+    color: white;
 }
 #cardContainer{
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    color: red;
-    font-size: larger;
+    background-color: #212121;
+    padding-top: 10px;
+    row-gap: 20px;
 }
-.card > div:last-child{
-    display:flex;
-    justify-content: space-between;
-    color: white;
-<<<<<<< HEAD
-=======
-}
-.card > div:last-child > img{
-    width: 36px;
-    height: 36px;
-    border-radius: 18px;
+.lastDiv{
     display: flex;
-    align-items: center;
-}
-.card > div:last-child > div{
-    display: flex;
-    flex-direction: column;
->>>>>>> 08d3c5810568b68b0668a2dde413ea50f17b7203
-}
-.card > div:last-child > img{
-    width: 36px;
-    height: 36px;
-    border-radius: 18px;
-    display: flex;
-    align-items: center;
-}
-.card > div:last-child > div{
-    display: flex;
-    flex-direction: column;
-}
-#container {
-    padding-left: 17%;
-    padding-top: 65px;
-    padding-right: 2%;
-    z-index: 0;
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
+    flex-direction: row;
     gap: 20px;
+}
 
+.iframic{
+    border-radius: 15px;
+    width: 350px;
+min-height: 200px;
+}
+
+#container {
+background-color: #212121;
+color: white;
+}
+.video-content {
+    width: 80vw;
+    height: 230px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0px;
+    
+    /* padding-left:20px; */
+}
+
+.video-content > div > b{
+    position: relative;
+    top: 55px;
+    right: 45px;
+    padding: 0 5px;
     background-color: black;
 }
-
-.video-content > a > b{
-    position: relative;
-    bottom: 40px;
-    left: 240px;
-    padding: 0 5px;
-    border-radius: 5px; 
+.video-content > div> img{
+    border-radius: 50%;
 }
 
+.title > a{
+    text-decoration: none;
+    font-size: larger !important;
+    color: white;
+}
 .thumbnail {
-    width: 100%;
-    height: 155px;
+    width: 360px;
+    height: 201px;
+    border-radius: 20px;;
 }
 
 .channel-name, .view-count {
     text-decoration: #c0bbbb;
-    color: #AAAAAA;
+    color: white;
+    font-size: small;
 }
 
 .title {
@@ -203,3 +202,4 @@ background-color: gray;
     align-items: flex-start;
     margin-top: -20px;
 }
+

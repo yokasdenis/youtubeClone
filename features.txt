@@ -1,8 +1,9 @@
 sidebar toggle: extra information is hidden when toggled show relevant features
 Home link: links to the home page of user
 scroll feature: left scroll button disappears when original scroll position is reached and appears when needed
-search functionality
+search functionality: you can search for any youtube video
 
 challenges
 couldn't render channel logo for all cards
 couldn't render video views for all cards
+some videos from search dont play

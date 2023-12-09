@@ -19,8 +19,9 @@ topMainBody.addEventListener('scroll', function () {
 }});
 
 
-const API_KEY="AIzaSyDADh9Tks_KcpyjmnyqDLAiIrvpjW8QVAo";
+const apiKey="AIzaSyBcBP91qa8d4CIm0EPzcoXUX90gmwlbFoo";
 const BASE_URL = "https://www.googleapis.com/youtube/v3";
+localStorage.setItem("api_Key", apiKey);
 
 
 async function fetchVideos(searchQuery, maxResults) {
@@ -30,16 +31,16 @@ async function fetchVideos(searchQuery, maxResults) {
   const data = await response.json();
   localStorage.setItem("data",JSON.stringify(data.items))
 }
-fetchVideos("music",12)
 
 
-// async function getChannelLogo(channelId){
-//   // https://www.googleapis.com/youtube/v3/channels?key=AIzaSyBmOfUnRNYc22e04ZmK79uRbPb6388K9AE&part=snippet&id=UC8Wd_RVw8T1O1_IWEbICkIg
-//   const response = await fetch(`${BASE_URL}/channels?key=${API_KEY}&part=snippet&id=${channelId}`);
-//   const data = await response.json();
-//   // console.log(data);
-//   localStorage.setItem("data2",JSON.stringify(data.items))
-// }
+
+async function getChannelLogo(channelId){
+  // https://www.googleapis.com/youtube/v3/channels?key=AIzaSyBmOfUnRNYc22e04ZmK79uRbPb6388K9AE&part=snippet&id=UC8Wd_RVw8T1O1_IWEbICkIg
+  const response = await fetch(`${BASE_URL}/channels?key=${apiKey}&part=snippet&id=${channelId}`);
+  const data = await response.json();
+  // console.log(data);
+  localStorage.setItem("data2",JSON.stringify(data.items))
+}
 async function getVideoStats(videoId){
   // https://www.googleapis.com/youtube/v3/videos?key=AIzaSyBmOfUnRNYc22e04ZmK79uRbPb6388K9AE&part=statistics&id=JhIBqykjzbs
   const response = await fetch(`${BASE_URL}/videos?key=${apiKey}&part=statistics&id=${videoId}`);
@@ -69,14 +70,14 @@ function renderAll(){
     const card = document.createElement("div");
     card.classList.add("card");
     card.innerHTML = `
-      <div id="${dta[i].id.videoId}">
+      <div class="iframic" id="${dta[i].id.videoId}">
       </div>
-      <div>
-      <img src=${dta2.items[0].snippet.thumbnails.default.url}>
-      <div>
-        <span>${dta[i].snippet.description}</span>
-        <span>${dta[i].snippet.channelTitle}</span>
-        <span>${getViews(dta3.items[0].statistics.viewCount)}</span>
+
+      <p style="font-size: 20px;">${dta[i].snippet.channelTitle}</p>
+
+      <span>${dta[i].snippet.description}</span>
+      <div class="lastDiv">
+        <span>${getViews(dta3.items[0].statistics.viewCount)}.</span>
         <span>${calcTime(currentDate, new Date(dta[i].snippet.publishedAt))}</span>
         </div>
       </div>
@@ -93,7 +94,7 @@ function renderAll(){
 window.addEventListener("load", () => {
   // we need to write logic for rendering video player
   // iframe
-
+  fetchVideos("music",12) 
   renderAll()
   divIds.forEach((item) => {
     let videoId =String(item);
@@ -140,10 +141,12 @@ function calcTime (curr,old) {
   }
 
 }
-
+const searchInput=document.getElementById("search")
+const searchButton=document.getElementById("searchIconDiv")
 
 function searchVideos() {
   cardContainer.innerHTML="";
+  container.innerHTML="loading please wait..."
   let searchValue = searchInput.value;
   if(searchValue == "")
     fetchVideos2("MP");
@@ -191,22 +194,20 @@ function showThumbNails2(items) {
     });
 
     let videoChildren = `
+    <div>
         <a href="#" class="visual">
           <img src="${imageUrl}" class="thumbnail"/>
-          <b>${formatDuration(videoItem.duration)}</b>
         </a>
-        <div class="details flex-div">
-          <img src="user1.png">
-          <div>
-            <div class="title">
-              <a href="#">${videoItem.snippet.title}</a>
-            </div>
-            <div>
-              <p class="channel-name">${videoItem.snippet.channelTitle}</p>
-              <p class="view-count">${videoItem.videoStats ? getViews(videoItem.videoStats.viewCount) + " views": "NA"}</p>
-            </div>
-          </div>
+        <b>${formatDuration(videoItem.duration)}</b>
         </div>
+        <div class="details flex-div">
+        <div class="title">
+        <a href="#">${videoItem.snippet.title}</a>
+        <p class="view-count">${videoItem.videoStats ? getViews(videoItem.videoStats.viewCount) + " views": "NA"}</p>
+      </div>
+          <img src="user1.png">
+          <p class="channel-name">${videoItem.snippet.channelTitle}</p>
+          </div>
     `;
     videoElement.innerHTML = videoChildren ;
     container.append(videoElement);
@@ -247,6 +248,18 @@ async function fetchStats(videoId){
   let response = await fetch(endpoint); 
   let result = await response.json();
   return result ;
+}
+
+function getViews(n){
+  if(n < 1000)
+      return n ;
+
+  if(n <= 999999){
+      n /= 1000;
+      n = parseInt(n);
+      return n + "K" ;
+  }
+  return parseInt(n / 1000000).toFixed(1) + "M" ;
 }
 
 
