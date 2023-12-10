@@ -9,9 +9,9 @@
 3.some videos from search dont play
 
 **features to add**
-toggle replies on and off, hide and show onClick
-sidebar toggle: extra information is hidden when toggled show relevant features
-Home link: links to the home page of user
+1.toggle replies on and off, hide and show onClick
+2.sidebar toggle: extra information is hidden when toggled show relevant features
+3.Home link: links to the home page of user
 
-testing
+**testing**
 for a test run search joji run (official video)
