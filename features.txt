@@ -7,3 +7,6 @@ challenges
 couldn't render channel logo for all cards
 couldn't render video views for all cards
 some videos from search dont play
+
+features to add
+toggle replies on and off, hide and show onClick

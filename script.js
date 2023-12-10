@@ -19,7 +19,7 @@ topMainBody.addEventListener('scroll', function () {
 }});
 
 
-const apiKey="AIzaSyBcBP91qa8d4CIm0EPzcoXUX90gmwlbFoo";
+const apiKey="AIzaSyDbwCL82KD-kuuen6d8NtxB1r15HdC13Xs";
 const BASE_URL = "https://www.googleapis.com/youtube/v3";
 localStorage.setItem("api_Key", apiKey);
 
@@ -146,7 +146,8 @@ const searchButton=document.getElementById("searchIconDiv")
 
 function searchVideos() {
   cardContainer.innerHTML="";
-  container.innerHTML="loading please wait..."
+  container.innerHTML=`loading please wait...
+  <i class="fa-solid fa-spinner fa-spin-pulse" style="color: #ffffff;"></i>`
   let searchValue = searchInput.value;
   if(searchValue == "")
     fetchVideos2("MP");

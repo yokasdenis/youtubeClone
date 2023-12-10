@@ -58,29 +58,39 @@ async function fetchStats(videoId) {
     title.innerText = item.snippet.title;
     title.style.color = "white";
     title.style.fontSize = "20px";
-    statsContainer.innerHTML = `
-        <div class="profile">
+    statsContainer.innerHTML = `        
+         
+                <div class="owner">
                 <img src="https://i.ytimg.com/vi/D-qj0L68RhQ/default.jpg" class="channel-logo" alt="">
-                <div class="owner-details">
-                    <span style="color: white ">${item.snippet.channelTitle}</span>
-                    <span>20 subscribers</span>
+                   <div class="middle"> 
+                   <span style="color: white ">${item.snippet.channelTitle}</span>
+                   <span>20 subscribers</span>
+                   </div>
+                   <button class="sub">Subscribe</button>
+                    <div class="like">
+                    <i class="fa-regular fa-thumbs-up fa-lg" style="color: #f7f9fd;"></i>
+                    <span>${calculateViews(item.statistics.likeCount)}</span>
+                    <div></div>
+                    <i class="fa-regular fa-thumbs-up fa-rotate-180 fa-lg" style="color: #fafafa;"></i>
+                    </div>
+                    <div class="share">
+                    <i class="fa-solid fa-share fa-lg" style="color: #fcfcfd;"></i>
+                    <span>Share</span>
+                    </div>
                 </div>
-        </div>
-        <div class="stats">
-            <div class="like-container">
-                <div class="like">
-                    <span class="material-icons">thumb_up</span>
-                    <span>${item.statistics.likeCount}</span>
-                </div>
-                <div class="like">
-                    <span class="material-icons">thumb_down</span>
-                </div>
-            </div>
+
+       
             <div class="comments-container">
-                <span class="material-icons">comment</span>
-                <span>${item.statistics.commentCount}</span>
+                <h4>${item.statistics.commentCount} Comments</h4>
+                <i class="fa-solid fa-arrow-down-wide-short fa-xl" style="color: #ffffff;"></i>
+                <span>Sort</span>
             </div>
-        </div>
+            
+            <div class="commLine">
+            <img class="userImg" src="user.png"
+            <span>Add Comment</span>
+            <hr id="hr">
+            </div>
         `;
   } catch (error) {
     console.log("error", error);
@@ -102,17 +112,17 @@ function renderComments(commentsList) {
                 <div class="comment-right-half">
                     <b>${topLevelComment.snippet.authorDisplayName}</b>
                     <p>${topLevelComment.snippet.textOriginal}</p>
-                    <div style="display: flex; gap: 20px">
-                        <div class="like">
-                            <span class="material-icons">thumb_up</span>
-                            <span>${topLevelComment.snippet.likeCount}</span>
+                    <div>
+                        <div class="likey">
+                        <i class="fa-regular fa-thumbs-up fa-lg" style="color: #f7f9fd;"></i>
+                            <span>${calculateViews(topLevelComment.snippet.likeCount)}</span>
+                            <i class="fa-regular fa-thumbs-up fa-rotate-180 fa-lg" style="color: #fafafa;"></i>
+                            <span class="likeys">Replies</span>
                         </div>
-                        <div class="like">
-                            <span class="material-icons">thumb_down</span>
-                        </div>
-                        <button class="reply" onclick="loadComments(this)" data-comment-id="${topLevelComment.id}">
+                        <div class="reply" onclick="loadComments(this)"  data-comment-id="${topLevelComment.id}">
+                        <i class="fa-solid fa-caret-down" style="color: #0641a7;"></i>
                             Replies(${comment.snippet.totalReplyCount})
-                        </button>
+                        </div>
                     </div>
                 </div>
             `;
@@ -121,6 +131,7 @@ function renderComments(commentsList) {
 }
 
 async function loadComments(element) {
+  
   const commentId = element.getAttribute("data-comment-id");
   console.log(commentId);
   let endpoint = `https://www.googleapis.com/youtube/v3/comments?part=snippet&parentId=${commentId}&key=${apiKey1}`;
@@ -132,30 +143,37 @@ async function loadComments(element) {
     for (let i = 0; i < commentsList.length; i++) {
       let replyComment = commentsList[i];
       let commentNode = document.createElement("div");
+      toggleComments(commentNode)
       commentNode.className = "comment comment-reply";
-
+      
       commentNode.innerHTML = `
                         <img src="${replyComment.snippet.authorProfileImageUrl}" alt="">
                         <div class="comment-right-half">
                             <b>${replyComment.snippet.authorDisplayName}</b>
                             <p>${replyComment.snippet.textOriginal}</p>
                             <div class="options">
-                                <div class="like">
-                                    <span class="material-icons">thumb_up</span>
+                                <div class="likey">
+                                <i class="fa-regular fa-thumbs-up fa-lg" style="color: #f7f9fd;"></i>
                                     <span>${replyComment.snippet.likeCount}</span>
+                                    <i class="fa-regular fa-thumbs-up fa-rotate-180 fa-lg" style="color: #fafafa;"></i>
                                 </div>
-                                <div class="like">
-                                    <span class="material-icons">thumb_down</span>
-                                </div>
+                               
+                                   
+                               
                             </div>
                     `;
-
+      
       parentNode.append(commentNode);
     }
   } catch (error) {
     console.log("Can't load comment: " + error);
   }
 }
+
+function toggleComments(element) {
+    element.classList.toggle("hide");
+}
+
 
 let recommendedSectionDiv = document.getElementById("recommendedVideo");
 async function getRecommendedVideos(videoTitle) {
@@ -246,10 +264,10 @@ async function displayRecommendedData(data) {
     }">
     <div>
     <div class="channel">
-        <h4>${ele.snippet.title}</h4>
+        <h5>${ele.snippet.title}</h5>
     </div>
     <div>
-        <p>${ele.snippet.channelTitle}</p>
+        <span>${ele.snippet.channelTitle}</span>
         <p> ${calculateViews(
           ele.viewObject[0].statistics.viewCount
         )} views , ${displayDuration} ago </p>
