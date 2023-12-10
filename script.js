@@ -220,7 +220,7 @@ function navigateToVideo(videoId){
 
     document.cookie = `video_id=${videoId}; path=${path}`;
     let linkItem = document.createElement("a");
-    linkItem.href = "http://127.0.0.1:5501/video.html"
+    linkItem.href = "https://yokasdenis.github.io/youtubeClone/video.html"
     linkItem.target = "_blank";
     linkItem.click();
   }
